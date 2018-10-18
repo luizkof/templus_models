@@ -1,330 +1,90 @@
-# Templus Models
+# Métodos Numéricos 
 
-## Instalação
-Rails 4
-```ruby
-gem 'templus_models', '~> 1.0'
-```
+O projeto aqui presente prevê pontos posteriores de uma função f(x) dado um ponto (ou mais) e sua respectiva função derivada. Tal previsão pode ser feita utilizando um dos metodos seguintes:
+- Método de Euler
+- Método de Euler Inverso
+- Método de Euler Aprimorado
+- Método de Runge-Kutta
+- Método de Adams-Bashforth
+- Método de Adams-Moulton
+- Método de Diferenciação Inversa
 
-Rails 4 I18n
-```ruby
-gem 'templus_models', '~> 2.0'
-```
+## Começando
 
-Rails 5 I18n
-```ruby
-gem 'templus_models', '~> 3.0'
-```
+Para ter acesso a esse conteúdo basta ter o GitHub em instalado sua máquina e inserir os seguintes comandos:
 
-
-## Gerando um CRUD
-Utilize o generator CRUD para criar um novo crud
-```ruby
-rails g crud empresa
-```
-o arquivo empresa_crud.rb será criado:
-
-```
-create  app/raro_crud/empresa_crud.rb
-```
-
-O arquivo já configura o CRUD com todos os attributos do modelo:
-
-```ruby
-class EmpresaCrud < RaroCrud
-
-  titulo "Empresas"
-  subtitulo "Subtitulo", :index
-  descricao "Descrição do Cadastro", :index
-
-  link_superior "Novo Empresa", id: "novo-button", icon: "plus", link: "new"
-
-  ordenar_por :created_at
-  itens_por_pagina 20
-
-  #Campos mostrados na index
-  campo_tabela :nome,  label: "Nome"
-  campo_tabela :contato,  label: "Contato"
-  campo_tabela :telefone,  label: "Telefone"
-  campo_tabela :endereco,  label: "Endereco"
-
-  #Campos mostrados no formulários de cadastro
-  campo_formulario :nome,  label: "Nome"
-  campo_formulario :contato,  label: "Contato"
-  campo_formulario :telefone,  label: "Telefone"
-  campo_formulario :endereco,  label: "Endereco"
-
-  #Campos mostrados na visualizacao
-  campo_visualizacao :nome,  label: "Nome"
-  campo_visualizacao :contato,  label: "Contato"
-  campo_visualizacao :telefone,  label: "Telefone"
-  campo_visualizacao :endereco,  label: "Endereco"
-
-  #Campos mostrados na busca
-  campo_busca :nome,  label: "Nome"
-  campo_busca :contato,  label: "Contato"
-  campo_busca :telefone,  label: "Telefone"
-  campo_busca :endereco,  label: "Endereco"
-
-  #Campos mostrados no relatório
-  campo_listagem :nome, label: "Nome"
-  campo_listagem :contato, label: "Contato", visible_if: Proc.new { Usuario.current.root? }
-  campo_listagem :telefone, label: "Telefone"
-  campo_listagem :endereco, label: "Endereco"
-
-end
-```
-
-## Alterar forma de visualização do campo
-
-```rb
-campo_visualizacao :tipo, label: "Tipo", label_method: :descricao_do_tipo
-```
-
-## Atributo especial de endereço
-Para vincular um formulário de cadastro de endereço utilize o método *adicionar_endereco* no arquivo:
-
-```ruby
-class EmpresaCrud < RaroCrud
-
-  titulo "Empresas"
-  subtitulo "Subtitulo", :index
-  descricao "Descrição do Cadastro", :index
-
-  link_superior "Novo Empresa", id: "novo-button", icon: "plus", link: "new"
-
-  adicionar_endereco
-  ...
-end
-```
-
-Depois adicione no seu modelo o método
-
-```rb
-accepts_nested_attributes_for :endereco, :allow_destroy => true
-```
-
-## Campos do tipo data
-Para vincular o *datepicker* no campo do tipo Date
-
-```rb
-campo_formulario :data_nascimento, label: "Data de nascimento", as: :string, input_html: {class: "datepicker"}
-```
-
-Para formatar a data na tabela, utilize o *date_format*
-
-```rb
-campo_tabela :created_at,  label: "Data", date_format: "%d/%m/%Y"
-```
-
-Para ordernar a tabela por outro campo
-
-```rb
-campo_tabela :tipo_veiculo,  label: "Tipo de Veiculo", sort_field: :tipo_veiculo_descricao
-```
-
-## Campos do tipo boolean
-Para vincular o *iCheck* no campo do tipo boolena
-
-```rb
-campo_formulario :data_nascimento, label: "Data de nascimento", input_html: {class: "i-checks"}
-```
-
-## Busca por intervalo
-Para buscas de valores em um intervalo
-
-```rb
-campo_busca :salario, label: "Salário", as: :range
-```
-
-## Aplicando mascara
-Para aplicar uma mascara em um campo
-
-```rb
-campo_formulario :data_nascimento, label: "Data de nascimento", input_html: {"data-mask" => "(99) 9999-9999"}
-```
-
-Para mascara de telefone com 8 e 9 digitos (com e sem DDD)
-```rb
-campo_formulario :data_nascimento, label: "Data de nascimento", input_html: {class: "mask-telefone"}
-ou
-campo_formulario :data_nascimento, label: "Data de nascimento", input_html: {class: "mask-telefone-ddd"}
-```
+- git init
+- git clone https://github.com/luizkof/Metodos-Numericos
 
 
-## Aplicando Dica
-Para aplicar uma dica em um campo
+Pronto já tem todo projeto em sua máquina. Aproveite!
 
-```rb
-campo_formulario :cpf, label: "CPF", hint: "Somente números"
-```
+### Pré Requisitos
 
-## Adicionando javascrit
-Para adicionar um *javascript* em um formulário do RaroCrud, basta criar um arquivo *.js* dentro da seguinte pasta
+Tendo o projeto em sua máquina, bastar ter os sequintes requisitos
+
+- Python 2.7.15 (ou versões superiores) já instalado
+- As bibliotecas Matplotlib Numpy e Sympy já instaladas
+
+
+### Instalando
+* [Para instalar o MatPlotLib](https://matplotlib.org/users/installing.html) 
+* [Para instalar o Sympy](https://docs.sympy.org/latest/install.html) 
+
+## Executando
+
+Para executar é bem simples, basta escrever a função que deseja calcular pontos posteriores. 
+É necessário seguir o seguinte padrão: 
+- Metodo Euler, Euler Inverso, Euler Aprimorado e Runge-Kutta: recebem como entrada os valores y(0),t(0), h, quantidade de passos, a função. E
+calcula cada passo do método, onde h é o incremento. Exemplos:
 
 ```
-assets/javascripts/crud/
-```
-
-Depois adicione em seu arquivo ModelCrud o javascript
-
-```rb
-script_formulario :cidade_estado
-```
-
-## Adicionando escopos
-Para adicionar um *scope* a uma index do RaroCrud
-
-```rb
-escopos [[:maiores_que_1000, "Maiores"], [:menores_que_1000, "Menores"]]
-```
-
-Para adicionar um *partial* para o *scope* em uma index do RaroCrud
-
-```rb
-escopos "/cancelamentos/escopos"
-```
-
-## Adicionando ações
-Para adicionar uma nova ação
-
-```rb
-acoes :pagar!, "Pagar"
-````
-
-Caso deseja inserir uma condição, basta adicionar um *proc* ao comando
-
-```rb
-acoes :pagar!, "Pagar", Proc.new {|p| Usuario.current.ability.can?(:create, p)}
-````
-
-Caso necessite de um ação que redireciona para uma view, basta adicionar uma *partial*
-
-```rb
-class PapelCrud < RaroCrud
-acoes :associar, "Definir permissões", Proc.new {|p| Usuario.current.ability.can?(:create,p)}
-end
-```
-Local e conteudo da *partial*
+    euler 0 0 0.1 20 1-t+4*y
+    euler_inverso 0 0 0.1 20 1-t+4*y
+    euler_aprimorado 0 0 0.1 20 1-t+4*y
+    runge_kutta 0 0 0.1 20 1-t+4*y
 
 ```
-papeis/_associar.html.erb
 
-<%= render_crud do %>
-#Conteudo HTML
-<% end %>
+- Mettodo Adam-Bashforth, Adam-Multon, Fórmula Inversa: recebem como entrada a lista de valores de y,t(0), h, quantidade de passos, a função,
+a ordem (de 2 a 8). E calcula cada passo do método.Também pode obter os valores iniciais por outros metodos. Exemplos:
+
 ```
-OBS: Caso você não necessite do template do RaroCrud, adicione somente o Conteudo HTML
-
-## Adicionando links para cada registro
-
-```rb
-links "Permissão", url: "/crud/papel"
-```
-
-Link com wiselink
-```rb
-links "Permissão Wiselink", url: "/crud/papel", wiselink: true
+    adam_bashforth 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 6
+    adam_bashforth_by_euler_inverso 0 0 0.1 20 1-t+4*y 6
+    adam_multon 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 6
+    adam_multon_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
+    formula_inversa 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 6
+    formula_inversa_by_euler 0 0 0.1 20 1-t+4*y 6
+    formula_inversa_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
 ```
 
-Link para associações
-```rb
-links "Testes1", associacao: :teste1
+Os métodos devem ser escrito exatamente dessa forma (iguais caractéres).
+Em seguida basta executar a seguinte linha de comando no terminal, já dentro da pasta que está o projeto:
+```
+    python metodos.py
 ```
 
-Link com partial
-```rb
-links "acoes", partial: "/atendimentos/acoes"
-```
+O resultado será salvo em um arquivo chamado resultado.txt. 
 
-## Retirando a opção de adicionar novo registro em relações *belongs_to*
+## Construido com:
 
-```rb
-campo_formulario :papel, label: "Papel", label_method: :descricao, add_registro: false
-```
-
-## Adicionar condição para mostrar um campo no formulário
-
-```rb
-  campo_formulario :perfil, label: "Perfil", if: Proc.new {|obj| Usuario.current.root? }
-```
-
-## Manipulando *actions* padrão do RaroCrud
-
-Para remover um *action* da tabela do RaroCrud
-
-```rb
-sem_visualizacao
-sem_edicao
-sem_exclusao
-````
-
-Para remover um *action* de acordo com uma condição
-
-```rb
-edicao Proc.new {|obj| !obj.root? }
-exclusao Proc.new {|obj| !obj.root? }
-visualizacao Proc.new {|obj| obj.root? }
-```
-
-Para remover a opção de *Exportar Relatório* de acordo com uma condição
-```rb
-listagem Proc.new { |model| Usuario.current.root? }
-```
-
-## Manipulando links superiores
-
-Adicionando um link
-```rb
-link_superior "Novo Teste", id: "novo-button", icon: "plus", link: "new"
-```
-Esse link será */crud/teste/new*
-
-Adicionando uma url
-```rb
-link_superior "Inicio", id: "novo-button", icon: "", url: :busca_api_cidades
-ou
-link_superior "Inicio", id: "novo-button", icon: "", url: "/api/busca/cidades"
-```
-Nesse caso será um redirecionamento
-
-Adicionando uma partial
-```rb
-link_superior "Novo", partial: "/usuarios/actions"
-```
-
-Aplicando permissão ao link
-```rb
-link_superior "Novo Teste", id: "novo-button", icon: "plus", link: "new", can: Proc.new {|obj| Usuario.current.ability.can?(:create, Teste)}
-```
-
-## Adicionando aucomplete
-Para adicionar *autocomplete* em um campo de formulário
-
-campo_formulario :cidade, label: "Cidade", autocomplete: {classe: :cidade, campo: :nome, label_method: :cidade_estado}
+* [Python](https://www.python.org/) 
+* [MatPlot](https://matplotlib.org/) 
+* [Sympy](https://www.sympy.org/pt/index.html) 
 
 
-## Formulário Alinhado
-Para adicionar formulários alinhados utilize o método _grupo_formulario_:
 
-```rb
-  campo_formulario :dado_boleto, label: "Dados para emissão de boleto",
-                   grupo: [{campo: :banco, label: "Banco", add_registro: false},
-                           {campo: :conta, label: "Conta"},
-                           {campo: :observacao, label: "Instruções bancárias"}]
-```
+## Versionamento
+Usamos o GitHub para controle de versão. Veja mais em https://github.com/luizkof/Metodos-Numericos.
 
-Não se esqueça de permitir os campos dos filhos no modelo do pai com _accepts_nested_attributes_for_
+## Autor
 
-```rb
-  accepts_nested_attributes_for :subtopicos, :allow_destroy => true
-```
+* **Luiz Albuquerque** - *Initial work* - [PurpleBooth](https://github.com/luizkof)
 
-Caso deseja um label diferente para os botões Adicionar e Remover do grupo, basta adicionar o campo *sublabel*
 
-```rb
-  campo_formulario :dado_boleto, label: "Dados para emissão de boleto", sublabel: "Boleto"
-                   grupo: [{campo: :banco, label: "Banco", add_registro: false},
-                           {campo: :conta, label: "Conta"},
-                           {campo: :observacao, label: "Instruções bancárias"}]
-```
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
